@@ -1,8 +1,8 @@
-%% Supplemental figure 1 - growth vs potency
+%% Figure S3 - Growth vs Potency
 % Load variables
-load './Calculating growth rate/GRVar.mat'
+load './SuppFig2ACalculatingGrowthRate/GRVar.mat'
 load StdPotFig1Variables.mat
-load MGCFig1Variables.mat % to get mediaColors
+load '../BMD Dataset/MGCFig1Variables.mat' % to get mediaColors
 
 % Clarifying names
 stdPot = Z; clear Z;
@@ -66,5 +66,5 @@ end
 
 % Save figure
 set(fGR, 'Renderer', 'painters');
-savefig(fGR, ['supp1 ' char(date) '.fig']);
-%saveas(fGrEndPt, 'supp1', 'svg');
+savefig(fGR, ['supp3 ' char(date) '.fig']);
+%saveas(fGrEndPt, 'supp3', 'svg');

@@ -1,10 +1,11 @@
 %% Figure 1 panel creation
+% Note that Figure 1C is separate because it uses a different dataset
 % SFS 12-09-25
 %% Load datasets
 load ../'BMD Dataset'/MGCFig1Variables.mat
 load ../'BMD Dataset'/StdPotFig1Variables.mat
 
-%% Figure 1b 
+%% Figure 1B
 f1b = figure; hold on;
 for i = 1:length(conditionNames) % looping through each condition
     x = 1:length(drugNames); % all drugs on x axis
@@ -57,35 +58,6 @@ saveas(f1b, ['f1b ' char(date) '.svg']);
 % set(fLegend, 'Renderer', 'painters');
 % saveas(fLegend, ['fLegend ' char(date) '.svg']);
 % exportgraphics(fLegend, 'fLegend.eps', 'ContentType', 'vector');
-%% Figure 1c
-
-% Calculating normalized fold change of MGCs for each abx
-rangeMed = []; FC_rangeMed = [];
-for i = 1:length(drugNames)
-    %rangeMed(i) = range(MGC_Medians(i,:));
-    FC_rangeMed(i) = max(MGC_Medians(i,:))./min(MGC_Medians(i,:));
-end
-
-% Generate skinny bar plot
-f1c = figure; hold on;
-b = bar(FC_rangeMed, 'FaceColor','flat');
-grid on;
-ylabel('fold change MGC');
-xticks([1:length(drugNames)])
-box on;
-xticklabels(drugNames);
-ylim([1 10000]);
-yscale('log');
-
-b.CData = [255 255 255]./255;
-b.BarWidth = 0.2;
-set(f1c, 'Position', [0 0 850 700]);
-
-% Saving figure
-savefig(f1c, ['f1c ' char(date) '.fig']);
-set(f1c, 'Renderer', 'painters');
-saveas(f1c, ['f1c ' char(date) '.svg']);
-exportgraphics(f1c, 'f1c.eps', 'ContentType', 'vector');
 
 %% Figure 1D: Clustergram
 % Generate clustergram
@@ -103,7 +75,7 @@ exportgraphics(gcf, 'fig1dTry2.eps', 'ContentType', 'vector');
 % saveas(f1d, ['f1d ' char(date) '.svg']);
 % exportgraphics(f1d, 'f1d.eps', 'ContentType', 'vector');
 
-%% Figures 1e and 1f
+%% Figures 1E and 1F
 
 % Calculate correlations between media and between drugs
 [rDrugs pDrugs] = corr(Z','rows','pairwise');

@@ -1,8 +1,8 @@
-%% Supplemental table 1
+%% Supplemental Data 4
 % SFS 02-14-26
 % Categorizing genes and storing in table
 %% Load
-load forTS1.mat
+load forTS4.mat
 
 %% Sort genes
 % Table categories defined by most extreme frequency change in a drug

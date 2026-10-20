@@ -1,10 +1,10 @@
-%% Supp Fig 2
+%% Supp Fig 4
 % SFS 01-252-26
 %% Load data
-load ../'Dose Response Dataset'/doseResponseSupp2.mat
+load ../'Dose Response Dataset'/doseResponseSupp4.mat
 
 %% Calculate IC50s for additional drugs
-% Initial varaibles
+% Initial variables
 x = time;
 numDrugDil = length(avAUC)./length(drugNames); % 12
 
@@ -13,7 +13,7 @@ tfPlot = 1;
 requestedICs = 50;
 
 % New folder
-tempDir = 'Supp2plots';
+tempDir = 'Supp4plots';
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end 

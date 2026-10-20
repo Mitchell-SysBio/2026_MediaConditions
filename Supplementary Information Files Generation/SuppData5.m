@@ -1,4 +1,4 @@
-%% Supplementary Table 2 Generation
+%% Supplementary Data 5 Generation
 % SFS 01-26-26
 %% Load GSEA variables
 % using data from Figure 2 GSEA

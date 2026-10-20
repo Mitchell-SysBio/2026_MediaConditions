@@ -1,4 +1,4 @@
-%% Supp Fig 1B
+%% Figure 1C
 % SFS 09-12-25
 
 %% Load variables from excel sheet
@@ -43,7 +43,7 @@ MGC_Medians_ReOrdered = MGC_Medians_ReOrdered([1:6],:);
 clear count; clear j; clear i; clear drugCatIdx; clear drugNamesTemp; clear MGC_MediansTemp; clear tempIdx; clear desiredDrugOrder; clear drugIdx; clear drugIdx2;
 %% Transform again by media order to match SMX increasing resistance order
 % Same order as in Fig 1 so importing it
-load MGCFig1Variables.mat conditionNames
+load ../'BMD Dataset'/MGCFig1Variables.mat conditionNames
 conditionNamesFig1 = conditionNames;
 clear conditionNames
 
@@ -68,7 +68,7 @@ FAScreen_shapeIdx = mediaTypesIdx(SMX_order_idx);
 
 clear mediaColors; clear mediaTypesIdx; clear SMX_order_idx
 %% Figure Creation
-s1b = figure; hold on;
+f1c = figure; hold on;
 for i = 1:length(conditionNames)
     x = 1:length(drugNames); % all drugs on x axis
     y = MGC_Medians(:,i);
@@ -96,10 +96,10 @@ xticklabels(drugNames);
 ylabel("MGC median");
 grid on;
 yscale log;
-set(s1b, 'Position', [0 0 800 500]);
+set(f1c, 'Position', [0 0 800 500]);
 
 % Saving in a number of ways
-savefig(s1b, ['s1b ' char(date) '.fig']);
-%set(s1b, 'Renderer', 'painters');
-%saveas(s1b, ['s1b ' char(date) '.svg']);
-%exportgraphics(s1b, 's1b.eps', 'ContentType', 'vector');
+savefig(f1c, ['f1c ' char(date) '.fig']);
+%set(f1c, 'Renderer', 'painters');
+%saveas(f1c, ['f1c ' char(date) '.svg']);
+%exportgraphics(f1c, 'f1c.eps', 'ContentType', 'vector');

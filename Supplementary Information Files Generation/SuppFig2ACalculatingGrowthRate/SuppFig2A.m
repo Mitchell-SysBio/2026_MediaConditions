@@ -1,8 +1,10 @@
-%% Calculating growth rate from tecan experiments
-% SFS 12-07-25
+%% Supplemental Figure 2A
+% Calculating growth rate from plate reader experiments
+% SFS 10-09-2026
 
 % Calculates growth rate from Tecan growth curve experiments 
 % using the function fitKishonyRateFunc.m
+
 %% Load variables
 % Load the Tecan growth data
 dataTable1 = readtable('20240323_results.xlsx');
@@ -41,7 +43,7 @@ finTP = 41;
 % in hours
 finTPGRArray = [7, 18, 10, 8, 10, 19, 9, 15, 11, 12, 11, 11, 13, 11, 11, 11, 8, 9, 9, 11, 8];
 
-%% Convert values from abs to OD
+%% Convert values from absorbance to OD
 load ODtoCFU120.mat % load calibration curve for 120 uL
 for iPlate = 1:length(dataArrays)
     dataArraysOD{iPlate} = (dataArrays{iPlate} - lm.Coefficients.Estimate(1))./lm.Coefficients.Estimate(2);
@@ -147,19 +149,25 @@ for iCond = 1:size(meansArray,2)
     AUC(iCond) = trapz(y);
 end
 
-%% Plotting fit curves (for confirming adequate fit - optional)
-% for i = 1:length(fits)
-%     subplot(4,6,i)
-%     plot(0:0.5:(finTP/2)-0.5, meansArray(1:(finTP),i), 'Marker','.', 'LineStyle','none', 'Color', 'r'); hold on;
-%     plot(0:0.5:finTPGRArray(i), meansArray(1:(finTPGRArray(i)*2)+1,i), 'Marker','.', 'LineStyle','none', 'Color', 'k'); hold on;
-%     p = plot(fits{i});
-%     p.Color = 'k';
-%     title(condsNew{i})
-%     text(10, 0.25, num2str(GR(i)));
-%     xlabel('time (hours)');
-%     ylabel('OD at 600 nm');
-%     grid on;
-% end
+%% Plot growth curves with standard deviation
+figure; hold on;
+for iCond = 1:size(meansArray,2)
+     % Isolating condition up to desired time point
+    y = meansArray(1:length(meansArray), iCond)';
+    x = 0:0.5:(length(meansArray)/2)-0.5;
+    e = stdArray(1:length(meansArray),iCond)'; 
+
+    % Plot
+    subplot(3,7,iCond)
+    errorbar(x,y,e,'Marker','.')
+    xlabel('time (hours)');
+    ylabel('OD at 600 nm');
+    grid on;
+    ylim([-0.1 3]);
+    xticks(0:5:20);
+    yticks(0:0.5:3);
+    title(condsNew{iCond})
+end
 
 %% Save growth rate variable
 save('GRVar.mat', 'GR', 'condsNew', 'AUC');
